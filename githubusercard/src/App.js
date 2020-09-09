@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import Users from "./components/Users";
 import Following from "./components/Following";
+import SearchForm from "./components/SearchForm";
 
 // const App = () => {
 //   const [users, setUsers] = useState([]);
@@ -42,10 +43,19 @@ class App extends React.Component {
       .catch((err) => console.log(err));
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.users !== this.state.users) {
+      console.log("pokemons state has changed.");
+    }
+  }
+
   render() {
     return (
       <div className="App">
         <h1>Github Usercards</h1>
+
+        <SearchForm />
+
         <Users users={this.state.users} />
         {this.state.following.map((follow) => (
           <Following key={follow.id} follow={follow} />
